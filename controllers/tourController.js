@@ -1,9 +1,37 @@
-const express = require('express');
 const Tour = require('./../models/tourModel');
 
 exports.getAllTours = async (req, res) => {
   try {
-    const tours = await Tour.find();
+    console.log(req.query);
+    //BUILD THE QUERY
+    //filtering
+    const queryObj = { ...req.query };
+    const excludedFiled = ['page', 'sort', 'limit', 'fileds'];
+    excludedFiled.forEach((el) => delete queryObj[el]);
+
+    //Advanced filtering || Lecture 15 Problem
+    let queryStr = JOSN.stringify(queryObj);
+    queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
+    console.log(JOSN.parse(queryStr));
+
+    //{ difficulty: 'easy' , duration:{ $gte:5}}
+    //{ difficulty:'easy' ,  durationL{ gte:5}}
+    // gte, gt,lte, lt
+
+    // const tours = await Tour.find({
+    //   duration: 5,
+    //   difficulty: 'easy',
+    // });
+    const query = Tour.find(JOSN.parse(queryObj));
+    // const tours = await Tour.find()
+    //   .where('duration')
+    //   .equals(5)
+    //   .where('difficulty')
+    //   .equals('easy');
+
+    //EXECUTE THE QUERY
+    const tours = await query;
+    //Send response
     res.status(200).json({
       status: 'success',
       results: tours.length,
