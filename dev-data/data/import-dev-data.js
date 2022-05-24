@@ -32,6 +32,7 @@ const importData = async () => {
   } catch (error) {
     console.log(error);
   }
+  process.exit();
 };
 
 //Delete all data from COLLECTION
@@ -43,6 +44,13 @@ const deleteData = async () => {
   } catch (error) {
     console.log(error);
   }
+  process.exit();
 };
 
 console.log(process.argv);
+
+if (process.argv[2] === '--import') {
+  importData();
+} else if (process.argv[2] === '--delete') {
+  deleteData();
+}
