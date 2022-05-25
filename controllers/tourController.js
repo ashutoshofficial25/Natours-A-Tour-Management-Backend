@@ -2,27 +2,38 @@ const Tour = require('./../models/tourModel');
 
 exports.getAllTours = async (req, res) => {
   try {
-    console.log(req.query);
     //BUILD THE QUERY
-    //filtering
+    //1..filtering
     const queryObj = { ...req.query };
     const excludedFiled = ['page', 'sort', 'limit', 'fileds'];
     excludedFiled.forEach((el) => delete queryObj[el]);
-
+    console.log(queryObj);
     //Advanced filtering || Lecture 15 Problem
-    let queryStr = JOSN.stringify(queryObj);
+    let queryStr = JSON.stringify(queryObj);
     queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
-    console.log(JOSN.parse(queryStr));
 
-    //{ difficulty: 'easy' , duration:{ $gte:5}}
+    //{ difficulty: 'easy' , duration:{ $gte:5} }
     //{ difficulty:'easy' ,  durationL{ gte:5}}
     // gte, gt,lte, lt
 
-    // const tours = await Tour.find({
-    //   duration: 5,
-    //   difficulty: 'easy',
-    // });
-    const query = Tour.find(JOSN.parse(queryObj));
+    let query = Tour.find(JSON.parse(queryStr));
+
+    //2. Sorting
+    if (req.query.sort) {
+      const sortBy = req.query.sort.split(',').join(' ');
+      query = query.sort(sortBy);
+      //sort ('price averageRating)
+    } else {
+      query = query.sort('-createdAt');
+    }
+
+    //3 Field Limiting
+    if (req.query.fields) {
+      const fields = req.query.fields.split(',').join(' ');
+      query = query.select(fields);
+    } else {
+      query = query.select('-__v');
+    }
     // const tours = await Tour.find()
     //   .where('duration')
     //   .equals(5)
