@@ -27,13 +27,22 @@ exports.getAllTours = async (req, res) => {
       query = query.sort('-createdAt');
     }
 
-    //3 Field Limiting
+    //3 Field Limiting TODO: not working 17 lec
     if (req.query.fields) {
       const fields = req.query.fields.split(',').join(' ');
+      console.log(fields);
       query = query.select(fields);
     } else {
-      query = query.select('-__v');
+      query = query.select('name difficulty');
     }
+
+    //4 Pagination
+
+    // const page = req.qurey.page * 1 || 1;
+    // const limit = req.query.limit * 1 || 100;
+    // const skip = (page - 1) * limit;
+
+    // query = query.skip(skip).limit(limit);
     // const tours = await Tour.find()
     //   .where('duration')
     //   .equals(5)
