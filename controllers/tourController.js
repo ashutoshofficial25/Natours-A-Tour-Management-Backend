@@ -1,11 +1,18 @@
 const Tour = require('./../models/tourModel');
 
+exports.aliasTopTours = (req, res, next) => {
+  req.query.limit = '5';
+  req.query.sort = '-ratingsAverage,price';
+  req.query.fields = 'name,price,ratingsAverage,summary,difficulty';
+
+  next();
+};
 exports.getAllTours = async (req, res) => {
   try {
     //BUILD THE QUERY
     //1..filtering
     const queryObj = { ...req.query };
-    const excludedFiled = ['page', 'sort', 'limit', 'fileds'];
+    const excludedFiled = ['page', 'sort', 'limit', 'fields'];
     excludedFiled.forEach((el) => delete queryObj[el]);
     console.log(queryObj);
     //Advanced filtering || Lecture 15 Problem
@@ -27,22 +34,29 @@ exports.getAllTours = async (req, res) => {
       query = query.sort('-createdAt');
     }
 
-    //3 Field Limiting TODO: not working 17 lec
+    //3 Field Limiting
     if (req.query.fields) {
       const fields = req.query.fields.split(',').join(' ');
       console.log(fields);
       query = query.select(fields);
     } else {
-      query = query.select('name difficulty');
+      query = query.select('-__v');
     }
 
-    //4 Pagination
+    //4 Pagination TODO: fail Lec 18
 
-    // const page = req.qurey.page * 1 || 1;
-    // const limit = req.query.limit * 1 || 100;
-    // const skip = (page - 1) * limit;
+    const page = req.query.page * 1 || 1;
+    const limit = req.query.limit * 1 || 100;
+    const skip = (page - 1) * limit;
 
-    // query = query.skip(skip).limit(limit);
+    query = query.skip(skip).limit(limit);
+
+    if (req.query.page) {
+      const numTours = await Tour.countDocuments();
+      if (skip >= numTours) {
+        throw new Error('This page does not exist');
+      }
+    }
     // const tours = await Tour.find()
     //   .where('duration')
     //   .equals(5)
