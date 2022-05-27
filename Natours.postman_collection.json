@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "9bc32b7f-05ec-44d7-9f3b-e6d135742aa4",
+		"_postman_id": "e8e74ae3-9046-4054-a7de-baa9d241eba1",
 		"name": "Natours",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20504787"
 	},
 	"item": [
 		{
@@ -15,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"test tours\",\r\n    \"duration\":\"7 days\",\r\n    \"Difficulty\":\"easy\"\r\n    \"price\": 476,\r\n    \"rating\":4.6,\r\n\r\n}",
+							"raw": "{\r\n    \"name\": \"The t\",\r\n    \"duration\": 4,\r\n    \"maxGroupSize\":10,\r\n    \"difficulty\": \"difficult\",\r\n    \"price\": 976,\r\n    \"summary\":\"Test tour\",\r\n    \"imageCover\":\"tour-3-cover.jpg\",\r\n    \"secretTour\":true\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -23,12 +24,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/v1/tours",
+							"raw": "http://localhost:5000/api/v1/tours",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "5000",
 							"path": [
 								"api",
 								"v1",
@@ -44,16 +45,23 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/v1/tours",
+							"raw": "http://localhost:5000/api/v1/tours",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "5000",
 							"path": [
 								"api",
 								"v1",
 								"tours"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "name,duration,difficulty,price",
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -65,17 +73,17 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/v1/tours/7",
+							"raw": "http://localhost:5000/api/v1/tours/dfgsdfggdgg",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "5000",
 							"path": [
 								"api",
 								"v1",
 								"tours",
-								"7"
+								"dfgsdfggdgg"
 							]
 						}
 					},
@@ -124,6 +132,73 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Top-5-Tours",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/tours/top-5-cheap",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"tours",
+								"top-5-cheap"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tour-stats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/tours/tour-stats",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"tours",
+								"tour-stats"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get-Monthly-Plan",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/tours/month-plan/2021",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"tours",
+								"month-plan",
+								"2021"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -136,12 +211,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/v1/users",
+							"raw": "http://localhost:5000/api/v1/users",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "5000",
 							"path": [
 								"api",
 								"v1",
@@ -233,6 +308,68 @@
 								"v1",
 								"users",
 								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"ashutoshg\",\r\n    \"email\": \"helss@gmail.com\",\r\n    \"password\": \"pass1234\",\r\n    \"passwordConfirm\": \"pass1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/users/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"ashu@gmail.com\",\r\n    \"password\":\"test1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"login"
 							]
 						}
 					},
