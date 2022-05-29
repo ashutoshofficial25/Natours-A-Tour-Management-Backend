@@ -1,9 +1,8 @@
 {
 	"info": {
-		"_postman_id": "e8e74ae3-9046-4054-a7de-baa9d241eba1",
+		"_postman_id": "8b727d57-4687-46d1-8d73-08012df6ed0a",
 		"name": "Natours",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "20504787"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
@@ -24,14 +23,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/v1/tours",
-							"protocol": "http",
+							"raw": "{{URL}}api/v1/tours",
 							"host": [
-								"localhost"
+								"{{URL}}api"
 							],
-							"port": "5000",
 							"path": [
-								"api",
 								"v1",
 								"tours"
 							]
@@ -42,17 +38,24 @@
 				{
 					"name": "GetAllTours",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/api/v1/tours",
-							"protocol": "http",
+							"raw": "{{URL}}api/v1/tours",
 							"host": [
-								"localhost"
+								"{{URL}}api"
 							],
-							"port": "5000",
 							"path": [
-								"api",
 								"v1",
 								"tours"
 							],
@@ -60,6 +63,11 @@
 								{
 									"key": "fields",
 									"value": "name,duration,difficulty,price",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
 									"disabled": true
 								}
 							]
@@ -73,17 +81,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/api/v1/tours/dfgsdfggdgg",
-							"protocol": "http",
+							"raw": "{{URL}}api/v1/tours/",
 							"host": [
-								"localhost"
+								"{{URL}}api"
 							],
-							"port": "5000",
 							"path": [
-								"api",
 								"v1",
 								"tours",
-								"dfgsdfggdgg"
+								""
 							]
 						}
 					},
@@ -95,14 +100,11 @@
 						"method": "PATCH",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/v1/tours/1",
-							"protocol": "http",
+							"raw": "{{URL}}api/v1/tours/1",
 							"host": [
-								"localhost"
+								"{{URL}}api"
 							],
-							"port": "3000",
 							"path": [
-								"api",
 								"v1",
 								"tours",
 								"1"
@@ -114,20 +116,27 @@
 				{
 					"name": "Delete",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/v1/tours/2",
-							"protocol": "http",
+							"raw": "{{URL}}api/v1/tours/628c6cb2266ea10fac163a8f",
 							"host": [
-								"localhost"
+								"{{URL}}api"
 							],
-							"port": "3000",
 							"path": [
-								"api",
 								"v1",
 								"tours",
-								"2"
+								"628c6cb2266ea10fac163a8f"
 							]
 						}
 					},
@@ -139,14 +148,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/api/v1/tours/top-5-cheap",
-							"protocol": "http",
+							"raw": "{{URL}}api/v1/tours/top-5-cheap",
 							"host": [
-								"localhost"
+								"{{URL}}api"
 							],
-							"port": "5000",
 							"path": [
-								"api",
 								"v1",
 								"tours",
 								"top-5-cheap"
@@ -161,14 +167,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/api/v1/tours/tour-stats",
-							"protocol": "http",
+							"raw": "{{URL}}api/v1/tours/tour-stats",
 							"host": [
-								"localhost"
+								"{{URL}}api"
 							],
-							"port": "5000",
 							"path": [
-								"api",
 								"v1",
 								"tours",
 								"tour-stats"
@@ -183,14 +186,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/api/v1/tours/month-plan/2021",
-							"protocol": "http",
+							"raw": "{{URL}}api/v1/tours/month-plan/2021",
 							"host": [
-								"localhost"
+								"{{URL}}api"
 							],
-							"port": "5000",
 							"path": [
-								"api",
 								"v1",
 								"tours",
 								"month-plan",
@@ -211,14 +211,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/api/v1/users",
-							"protocol": "http",
+							"raw": "{{URL}}api/v1/users",
 							"host": [
-								"localhost"
+								"{{URL}}api"
 							],
-							"port": "5000",
 							"path": [
-								"api",
 								"v1",
 								"users"
 							]
@@ -231,15 +228,21 @@
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://localhost:3000/api/v1/users",
-							"protocol": "http",
+							"raw": "{{URL}}api/v1/users",
 							"host": [
-								"localhost"
+								"{{URL}}api"
 							],
-							"port": "3000",
 							"path": [
-								"api",
 								"v1",
 								"users"
 							]
@@ -253,14 +256,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/v1/users/2",
-							"protocol": "http",
+							"raw": "{{URL}}api/v1/users/2",
 							"host": [
-								"localhost"
+								"{{URL}}api"
 							],
-							"port": "3000",
 							"path": [
-								"api",
 								"v1",
 								"users",
 								"2"
@@ -275,14 +275,11 @@
 						"method": "PATCH",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/v1/users/1",
-							"protocol": "http",
+							"raw": "{{URL}}api/v1/users/1",
 							"host": [
-								"localhost"
+								"{{URL}}api"
 							],
-							"port": "3000",
 							"path": [
-								"api",
 								"v1",
 								"users",
 								"1"
@@ -297,14 +294,11 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/v1/users/2",
-							"protocol": "http",
+							"raw": "{{URL}}api/v1/users/2",
 							"host": [
-								"localhost"
+								"{{URL}}api"
 							],
-							"port": "3000",
 							"path": [
-								"api",
 								"v1",
 								"users",
 								"2"
@@ -315,12 +309,23 @@
 				},
 				{
 					"name": "Signup",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"jwt\", pm.response.json().token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"ashutoshg\",\r\n    \"email\": \"helss@gmail.com\",\r\n    \"password\": \"pass1234\",\r\n    \"passwordConfirm\": \"pass1234\"\r\n}",
+							"raw": "{\r\n    \"name\": \"user\",\r\n    \"email\": \"user@gmail.com\",\r\n    \"password\": \"user1234\",\r\n    \"passwordConfirm\": \"user1234\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -328,14 +333,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/v1/users/signup",
-							"protocol": "http",
+							"raw": "{{URL}}api/v1/users/signup",
 							"host": [
-								"localhost"
+								"{{URL}}api"
 							],
-							"port": "5000",
 							"path": [
-								"api",
 								"v1",
 								"users",
 								"signup"
@@ -346,12 +348,23 @@
 				},
 				{
 					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"jwt\", pm.response.json().token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"ashu@gmail.com\",\r\n    \"password\":\"test1234\"\r\n}",
+							"raw": "{\r\n    \"email\":\"admin@gmail.com\",\r\n    \"password\":\"admin1234\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -359,17 +372,62 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/v1/users/login",
-							"protocol": "http",
+							"raw": "{{URL}}api/v1/users/login",
 							"host": [
-								"localhost"
+								"{{URL}}api"
 							],
-							"port": "5000",
 							"path": [
-								"api",
 								"v1",
 								"users",
 								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Forgot-Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"user@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}api/v1/users/forgotPassword",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								"forgotPassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset-Password",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/v1/users/resetPassword/asfgwegbwrgb",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								"resetPassword",
+								"asfgwegbwrgb"
 							]
 						}
 					},
