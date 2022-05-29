@@ -9,6 +9,10 @@ const handleDuplicateFieldsBD = (err) => {
   const message = `Duplicate value of field value: ${value}, Please use another value`;
   return new AppError(message, 400);
 };
+
+const handleJWTError = (err) => new AppError('Invalid Token! Please Login');
+const handleJWTExpiredError = (err) =>
+  new AppError('Your Token Has Expired! Please login again');
 const sendErrorDev = (err, res) => {
   res.status(err.statusCode).json({
     status: err.status,
@@ -44,7 +48,9 @@ module.exports = (err, req, res, next) => {
     let error = { ...err };
     if (error.name === 'CastError') error = handleCastErrorDB(error);
     if (error.name === 11000) error = handleDuplicateFieldsBD(error);
-
+    if (error.name === 'JsonWebToekenError') error = handleJWTError(error);
+    if (error.name === 'TokenExpiredError')
+      error = handleJWTExpiredError(error);
     sendErrorProd(error, res);
   }
 };
