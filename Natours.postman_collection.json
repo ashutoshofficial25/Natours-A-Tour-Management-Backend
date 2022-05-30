@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "8b727d57-4687-46d1-8d73-08012df6ed0a",
+		"_postman_id": "0335e82a-5c23-4def-b069-e7cc3e8f8e93",
 		"name": "Natours",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20504787"
 	},
 	"item": [
 		{
@@ -308,24 +309,23 @@
 					"response": []
 				},
 				{
-					"name": "Signup",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.environment.set(\"jwt\", pm.response.json().token);"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
+					"name": "Update-User-Data",
 					"request": {
-						"method": "POST",
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"user\",\r\n    \"email\": \"user@gmail.com\",\r\n    \"password\": \"user1234\",\r\n    \"passwordConfirm\": \"user1234\"\r\n}",
+							"raw": "{\r\n    \r\n    \"name\":\"test case\",\r\n    \"role\":\"admin\"\r\n    \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -333,19 +333,53 @@
 							}
 						},
 						"url": {
-							"raw": "{{URL}}api/v1/users/signup",
+							"raw": "{{URL}}api/v1/users/updateMe",
 							"host": [
 								"{{URL}}api"
 							],
 							"path": [
 								"v1",
 								"users",
-								"signup"
+								"updateMe"
 							]
 						}
 					},
 					"response": []
 				},
+				{
+					"name": "Delete-Current-user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/v1/users/deleteMe",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								"deleteMe"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Authencation",
+			"item": [
 				{
 					"name": "Login",
 					"event": [
@@ -364,7 +398,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"admin@gmail.com\",\r\n    \"password\":\"admin1234\"\r\n}",
+							"raw": "{\r\n    \"email\":\"admin@gmail.com\",\r\n    \"password\":\"admin1111\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -380,6 +414,45 @@
 								"v1",
 								"users",
 								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Signup",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"jwt\", pm.response.json().token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"testuser\",\r\n    \"email\": \"testusermm@gmail.com\",\r\n    \"password\": \"test1234\",\r\n    \"passwordConfirm\": \"test1234\",\r\n    \"role\":\"guide\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}api/v1/users/signup",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								"signup"
 							]
 						}
 					},
@@ -415,11 +488,31 @@
 				},
 				{
 					"name": "Reset-Password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"jwt\", pm.response.json().token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "PATCH",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\":\"newpasssword\",\r\n    \"passwordConfirm\":\"newpasssword\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{URL}}api/v1/users/resetPassword/asfgwegbwrgb",
+							"raw": "{{URL}}api/v1/users/resetPassword/92672c7f5ea140b0069cf7387339bef98695778b4655b52bbc7ac8ac16569e90",
 							"host": [
 								"{{URL}}api"
 							],
@@ -427,7 +520,56 @@
 								"v1",
 								"users",
 								"resetPassword",
-								"asfgwegbwrgb"
+								"92672c7f5ea140b0069cf7387339bef98695778b4655b52bbc7ac8ac16569e90"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update-User-Password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"jwt\", pm.response.json().token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"passwordCurrent\":\"admin1234\",\r\n    \"password\":\"admin1111\",\r\n    \"passwordConfirm\":\"admin1111\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}api/v1/users/updateMyPassword",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								"updateMyPassword"
 							]
 						}
 					},
