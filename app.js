@@ -1,6 +1,13 @@
 const express = require('express');
 
 const morgan = require('morgan');
+
+const rateLimit = require('express-rate-limit');
+const helmet = require('helmet');
+const mongoSanitize = require('express-mongo-sanitize');
+const xss = require('xss-clean');
+const hpp = require('hpp');
+
 const app = express();
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
@@ -10,12 +17,45 @@ const userRouter = require('./routes/userRoutes');
 //express cant read data directly body
 //so we use middleware
 
-// Middlewares
+//Global Middlewares
+//set Secutity http
+app.use(helmet());
+
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
+// limit request from /api
+const limiter = rateLimit({
+  max: 100,
+  windowMs: 60 * 60 * 1000,
+  message: ' Too many request from this IP please try again in an hour',
+});
+app.use('/api', limiter);
 
+//body parser, reading data from body into req.body
 app.use(express.json());
+
+//Data samitazitation against NoSql query injection
+app.use(mongoSanitize());
+
+//Data sanitzation against xss
+app.use(xss());
+
+// Prevent Parameter Pollutions
+app.use(
+  hpp({
+    whitelist: [
+      'duration',
+      'ratingsAverage',
+      'ratingsQunatity',
+      'maxGroupSize',
+      'difficulty',
+      'price',
+    ],
+  })
+);
+
+//serving static files
 app.use(express.static(`${__dirname}/public`));
 
 // app.use((req, res, next) => {
@@ -23,6 +63,7 @@ app.use(express.static(`${__dirname}/public`));
 //   next();
 // });
 
+//test middlewares
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
   console.log(req.headers);
