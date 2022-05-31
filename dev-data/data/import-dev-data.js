@@ -3,13 +3,13 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const Tour = require('./../../models/tourModel');
 
-dotenv.config({ path: './config.env' });
+dotenv.config({ path: './../../config.env' });
 //console.log(process.env);
 // const DB = process.env.DATABASE.replace(
 //   '<PASSWORD>,process.env.DATABASE_PASSWORD'
 // );
 const DB = process.env.DATABASE;
-//console.log(DB);
+console.log(DB);
 mongoose
   .connect(DB, {
     useNewUrlParser: true,
@@ -19,9 +19,7 @@ mongoose
   .then((con) => console.log('Database connected Successfully'));
 
 //Read JSON file
-const tours = JSON.parse(
-  fs.readFileSync(`${__dirname}/tours-simple.json`, 'utf-8')
-);
+const tours = JSON.parse(fs.readFileSync(`${__dirname}/tours.json`, 'utf-8'));
 
 //IMPORT data into database
 
@@ -40,7 +38,7 @@ const importData = async () => {
 const deleteData = async () => {
   try {
     await Tour.deleteMany();
-    console.log('Data Uploaded delelted');
+    console.log('Data delelted successfully');
   } catch (error) {
     console.log(error);
   }
