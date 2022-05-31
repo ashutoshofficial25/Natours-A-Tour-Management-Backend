@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "Tour",
+			"name": "Tours",
 			"item": [
 				{
 					"name": "CreateNewTour",
@@ -204,7 +204,7 @@
 			]
 		},
 		{
-			"name": "User",
+			"name": "Users",
 			"item": [
 				{
 					"name": "GetAllUsers",
@@ -570,6 +570,93 @@
 								"v1",
 								"users",
 								"updateMyPassword"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reviews",
+			"item": [
+				{
+					"name": "Create Review",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"review\":\"this is a very comfortable tour\",\r\n    \"rating\":4.5,\r\n    \"user\":\"6295f6192ea1ad2ae07f64c2\",\r\n    \"tour\":\"6295b8f371535e05906dbb0f\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}api/v1/review",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"review"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllReviews",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/v1/review",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"review"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get-a-Review",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Delete-Review",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/v1/review/6295e490d9b76c2844ad21c5",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"review",
+								"6295e490d9b76c2844ad21c5"
 							]
 						}
 					},
