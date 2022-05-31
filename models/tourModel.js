@@ -120,7 +120,7 @@ tourSchema.virtual('durationWeeks').get(function () {
   return this.duration / 7;
 });
 
-//VIRTUAL PUPULATE
+//VIRTUAL PUPULATE TODO: This is not working: don't know why?
 tourSchema.virtual('reviews', {
   ref: 'Review',
   foreignField: 'tour',
