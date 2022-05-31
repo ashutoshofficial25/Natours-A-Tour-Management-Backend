@@ -13,6 +13,7 @@ const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
+const reviewRouter = require('./routes/reviewRoutes');
 //const app = require('express')
 //express cant read data directly body
 //so we use middleware
@@ -72,6 +73,7 @@ app.use((req, res, next) => {
 //Routes
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/review', reviewRouter);
 
 //For handle undefined routes
 app.all('*', (req, res, next) => {
