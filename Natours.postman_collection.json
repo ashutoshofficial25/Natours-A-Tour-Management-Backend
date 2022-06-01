@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "0335e82a-5c23-4def-b069-e7cc3e8f8e93",
+		"_postman_id": "cee22000-c55c-4808-96ca-56dad782d2a1",
 		"name": "Natours",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "20504787"
@@ -398,7 +398,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"admin@gmail.com\",\r\n    \"password\":\"admin1111\"\r\n}",
+							"raw": "{\r\n    \"email\":\"test11@gmail.com\",\r\n    \"password\":\"test1234\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -437,7 +437,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"testuser\",\r\n    \"email\": \"testusermm@gmail.com\",\r\n    \"password\": \"test1234\",\r\n    \"passwordConfirm\": \"test1234\",\r\n    \"role\":\"guide\"\r\n    \r\n}",
+							"raw": "{\r\n    \"name\": \"testuser\",\r\n    \"email\": \"test11@gmail.com\",\r\n    \"password\": \"test1234\",\r\n    \"passwordConfirm\": \"test1234\",\r\n    \"role\":\"guide\"\r\n    \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -639,7 +639,10 @@
 					"name": "Get-a-Review",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": ""
+						}
 					},
 					"response": []
 				},
@@ -663,6 +666,43 @@
 					"response": []
 				}
 			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{jwt}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.environment.set(\"jwt\", pm.response.json().token);"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URL",
+			"value": "http://127.0.0.1:5000/",
+			"type": "string"
 		}
 	]
 }
