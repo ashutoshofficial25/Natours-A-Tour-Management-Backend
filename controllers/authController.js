@@ -110,7 +110,7 @@ exports.restrictTo = (...roles) => {
     //roles is an array['admin','lead-guide']
     if (!roles.includes(req.user.role)) {
       return next(
-        new AppError('You do not have permission to delete tour', 403)
+        new AppError('You do not have permission perform this action!', 403)
       );
     }
     next();
