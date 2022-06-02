@@ -1,5 +1,5 @@
 const express = require('express');
-
+const path = require('path');
 const morgan = require('morgan');
 
 const rateLimit = require('express-rate-limit');
@@ -9,6 +9,7 @@ const xss = require('xss-clean');
 const hpp = require('hpp');
 
 const app = express();
+
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 const tourRouter = require('./routes/tourRoutes');
@@ -19,6 +20,11 @@ const reviewRouter = require('./routes/reviewRoutes');
 //so we use middleware
 
 //Global Middlewares
+
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'views'));
+//serving static files
+app.use(express.static(path.join(__dirname, 'public')));
 //set Secutity http
 app.use(helmet());
 
@@ -56,9 +62,6 @@ app.use(
   })
 );
 
-//serving static files
-app.use(express.static(`${__dirname}/public`));
-
 // app.use((req, res, next) => {
 //   console.log('Hello from middle ware');
 //   next();
@@ -71,6 +74,12 @@ app.use((req, res, next) => {
   next();
 });
 //Routes
+app.get('/', (req, res) => {
+  res.status(200).render('base', {
+    tour: 'The Forest Hiker',
+    user: 'Ashutosh',
+  });
+});
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/review', reviewRouter);
