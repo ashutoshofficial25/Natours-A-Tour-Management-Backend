@@ -9,6 +9,8 @@ To run this project in your pc please :
 and then
 
   npm run start:dev
+  
   npm run strart:prod
+  
   npm run debug
  
