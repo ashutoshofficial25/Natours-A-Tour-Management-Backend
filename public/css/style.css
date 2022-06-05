@@ -28,6 +28,7 @@ html {
 }
 
 body {
+  background-color: #94e0ae;
   line-height: 1.6;
   font-weight: 300;
   font-family: 'Lato', sans-serif;
@@ -44,7 +45,7 @@ body {
 }
 
 .main {
-  background-color: #f7f7f7;
+  background-color: #55c57a;
   padding: 8rem 6rem;
   -webkit-box-flex: 1;
   -ms-flex: 1;
@@ -372,10 +373,10 @@ body {
     linear,
     left top,
     right bottom,
-    from(#7dd56f),
-    to(#28b487)
+    from(#7dd56f69),
+    to(#28b4886f)
   );
-  background-image: linear-gradient(to right bottom, #7dd56f, #28b487);
+  background-image: linear-gradient(to right bottom, #7dd56f5f, #28b48868);
   opacity: 0.85;
 }
 
@@ -1112,10 +1113,10 @@ body {
     linear,
     left top,
     right bottom,
-    from(#7dd56f),
-    to(#28b487)
+    from(#7dd56f37),
+    to(#28b48829)
   );
-  background-image: linear-gradient(to right bottom, #7dd56f, #28b487);
+  background-image: linear-gradient(to right bottom, #7dd56f81, #28b4887b);
   opacity: 0.7;
 }
 .card__picture-img {
