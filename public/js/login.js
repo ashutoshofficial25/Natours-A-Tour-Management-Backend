@@ -8,6 +8,12 @@ const login = async (email, password) => {
         password,
       },
     });
+    if (res.data.status === 'success') {
+      alert('Logged in successfuly');
+      window.setTimeout(() => {
+        location.assign('/');
+      }, 500);
+    }
   } catch (err) {
     console.log(err.response.data);
   }
