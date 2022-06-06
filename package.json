@@ -2,11 +2,14 @@
   "name": "natrous",
   "version": "1.0.0",
   "description": "Tours and travels",
-  "main": "index.js",
+  "main": "./public/js/bundle.js",
+  "source": "./public/js/bundle.js",
   "scripts": {
     "start:dev": "nodemon server.js",
     "start:prod": "NODE_ENV=production nodemon server.js",
-    "debug": "ndb server.js"
+    "debug": "ndb server.js",
+    "watch:js": "parcel watch ./public/js/index.js --dist-dir ./public/js",
+    "build:js": "parcel watch ./public/js/index.js --dist-dir ./public/js"
   },
   "author": "Ashutosh Maurya",
   "license": "ISC",
