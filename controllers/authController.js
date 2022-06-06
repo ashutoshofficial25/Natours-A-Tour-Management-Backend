@@ -75,6 +75,8 @@ exports.protect = catchAsync(async (req, res, next) => {
     req.headers.authorization.startsWith('Bearer')
   ) {
     token = req.headers.authorization.split(' ')[1];
+  } else if (req.cookies.jwt) {
+    token = req.cookies.jwt;
   }
   console.log(token);
   if (!token) {
@@ -103,6 +105,31 @@ exports.protect = catchAsync(async (req, res, next) => {
   req.user = freshUser;
   next();
 });
+
+//only for renderded pages and tehre will beno errors
+exports.isLoggedin = async (req, res, next) => {
+  if (req.cookies.jwt) {
+    //1 verify the token
+    const decoded = await promisify(jwt.verify)(
+      req.cookies.jwt,
+      process.env.JWT_SECRET
+    );
+
+    //2 Check the user still exist
+    const currentUser = await User.findById(decoded.id);
+    if (!currentUser) {
+      return next();
+    }
+    //3 Check if user change password after jwt was issued
+    if (currentUser.changedPasswordAfter(decoded.iat)) {
+      return next();
+    }
+    //4 Grant access to protected route
+    req.locals.user = currentUser;
+    return next();
+  }
+  next();
+};
 
 //Restrict to DELETING tours
 exports.restrictTo = (...roles) => {
