@@ -10,5 +10,6 @@ router.use(authController.isLoggedin);
 router.get('/', viewController.getOverview);
 router.get('/tour/:slug', viewController.getTour);
 router.get('/login', viewController.loginForm);
+router.get('/signin', viewController.signinForm);
 
 module.exports = router;

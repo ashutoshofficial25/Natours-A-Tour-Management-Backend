@@ -38,3 +38,10 @@ exports.loginForm = (req, res) => {
     title: `Login in to your account`,
   });
 };
+exports.signinForm = (req, res) => {
+  const signin = {};
+
+  res.status(200).render('signin', {
+    title: `Create a new  account`,
+  });
+};
