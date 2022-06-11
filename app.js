@@ -10,7 +10,7 @@ const hpp = require('hpp');
 const cookieParcer = require('cookie-parser');
 
 const app = express();
-
+const cors = require('cors');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 const tourRouter = require('./routes/tourRoutes');
@@ -22,7 +22,12 @@ const viewRouter = require('./routes/viewRouter');
 //so we use middleware
 
 //Global Middlewares
-
+app.use(cors());
+app.use(
+  cors({
+    origin: ['http://localhost:3000'],
+  })
+);
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 //serving static files
@@ -35,7 +40,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 // limit request from /api
 const limiter = rateLimit({
-  max: 100,
+  max: 10000,
   windowMs: 60 * 60 * 1000,
   message: ' Too many request from this IP please try again in an hour',
 });
