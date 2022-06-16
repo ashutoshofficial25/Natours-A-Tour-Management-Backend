@@ -9,12 +9,7 @@ process.on('uncaughtException', (err) => {
 });
 dotenv.config({ path: './config.env' });
 const app = require('./app');
-app.use(cors());
-app.use(
-  cors({
-    origin: ['http://localhost:3000'],
-  })
-);
+
 //console.log(process.env);
 // const DB = process.env.DATABASE.replace(
 //   '<PASSWORD>,process.env.DATABASE_PASSWORD'
