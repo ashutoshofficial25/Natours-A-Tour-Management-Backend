@@ -22,7 +22,6 @@ const reviewRouter = require('./routes/reviewRoutes');
 //so we use middleware
 
 //Global Middlewares
-// app.use(cors());
 app.use(cors());
 
 //serving static files

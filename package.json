@@ -6,7 +6,7 @@
   "source": "./public/js/bundle.js",
   "scripts": {
     "start:dev": "nodemon server.js",
-    "start:prod": "nodemon server.js",
+    "start": "node server.js",
     "debug": "ndb server.js"
   },
   "author": "Ashutosh Maurya",
