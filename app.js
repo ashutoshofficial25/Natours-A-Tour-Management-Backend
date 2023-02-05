@@ -78,6 +78,13 @@ app.use((req, res, next) => {
 
 //Routes
 
+app.get('/', (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: 'Your server is up and running',
+  });
+});
+
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/review', reviewRouter);
